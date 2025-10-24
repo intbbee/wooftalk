@@ -17,16 +17,16 @@ CONTEXT_SUMMARY_WINDOW_SIZE = 6
 # --- env ---
 load_dotenv()
 # Azure OpenAI
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-OPENAI_API_ENDPOINT = os.getenv("OPENAI_API_ENDPOINT")
-OPENAI_API_VERSION = os.getenv("OPENAI_API_VERSION")
-OPENAI_API_DEPLOYMENT = os.getenv("OPENAI_API_DEPLOYMENT")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
+OPENAI_API_ENDPOINT = os.getenv("OPENAI_API_ENDPOINT") or st.secrets.get("OPENAI_API_ENDPOINT")
+OPENAI_API_VERSION = os.getenv("OPENAI_API_VERSION") or st.secrets.get("OPENAI_API_VERSION")
+OPENAI_API_DEPLOYMENT = os.getenv("OPENAI_API_DEPLOYMENT") or st.secrets.get("OPENAI_API_DEPLOYMENT")
 # Azure Custom Vision
-CUSTOM_VISION_PREDICTION_ENDPOINT = os.getenv("CUSTOM_VISION_PREDICTION_ENDPOINT")
-CUSTOM_VISION_PREDICTION_KEY = os.getenv("CUSTOM_VISION_PREDICTION_KEY")
+CUSTOM_VISION_PREDICTION_ENDPOINT = os.getenv("CUSTOM_VISION_PREDICTION_ENDPOINT") or st.secrets.get("CUSTOM_VISION_PREDICTION_ENDPOINT")
+CUSTOM_VISION_PREDICTION_KEY = os.getenv("CUSTOM_VISION_PREDICTION_KEY") or st.secrets.get("CUSTOM_VISION_PREDICTION_KEY")
 # Azure Speech Service
-SPEECH_SERVICE_KEY = os.getenv("SPEECH_SERVICE_KEY")
-SPEECH_SERVICE_REGION = os.getenv("SPEECH_SERVICE_REGION")
+SPEECH_SERVICE_KEY = os.getenv("SPEECH_SERVICE_KEY") or st.secrets.get("SPEECH_SERVICE_KEY")
+SPEECH_SERVICE_REGION = os.getenv("SPEECH_SERVICE_REGION") or st.secrets.get("SPEECH_SERVICE_REGION")
 
 # --- session state ---
 def init_state():
@@ -570,7 +570,7 @@ def _normalize_typos(text: str) -> str:
 # Load task models
 @st.cache_resource
 def _load_task_models():
-    env_path = os.getenv("MODEL_PATH", "").strip()
+    env_path = os.getenv("MODEL_PATH", "").strip() or st.secrets.get("MODEL_PATH", "").strip()
     # print(f"Loading models from MODEL_PATH={env_path}")
     if env_path:
         try:
@@ -683,7 +683,7 @@ def predict_all_from_text(user_text: str) -> dict:
 
 # --- Simple RAG ---
 # Knowledge base directory and file map
-KB_DIR = os.getenv("KB_DIR") 
+KB_DIR = os.getenv("KB_DIR") or st.secrets.get("KB_DIR")
 _KB_FILE_MAP = {
     "health_assessment":       "healthcare.md",
     "exercise_routine":        "exercise.md",
