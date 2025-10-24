@@ -16,6 +16,9 @@ init_state()
 st.title("Let’s meet your pup 🐶")
 st.caption("Upload a photo to start a chat about your dog's breed and care tips. We don't store photos beyond this session. 💖")
 
+# Add a list to tell users that only specific dog breeds are supported
+st.info("⚠️ The WoofTalk demo currently supports: \n- Siberian Husky\n- Rottweiler\n- Great Dane\n- Golden Retriever\n- German Shepherd\n- Beagle\n- Yorkshire Terrier\n- Dobermann\n- Boxer\n- Chihuahua\n- Labrador Retriever.\n\nThanks for trying WoofTalk! 🐾")
+
 st.divider()
 
 # Invokes file selector to upload a dog photo
