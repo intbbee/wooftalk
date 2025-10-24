@@ -21,6 +21,10 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+# Check if dog profile exists
+if not st.session_state.get("dog_profile"):
+    reset_session()
+
 # Init session state
 init_state()
 
