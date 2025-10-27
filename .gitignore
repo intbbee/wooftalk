@@ -96,3 +96,6 @@ Icon?
 .idea/
 *.swp
 *.swo
+
+# Raw data
+raw/
